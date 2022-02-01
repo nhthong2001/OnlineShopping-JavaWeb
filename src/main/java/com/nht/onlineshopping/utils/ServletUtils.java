@@ -1,4 +1,4 @@
-package com.nhthong.onlineshopping.utils;
+package com.nht.onlineshopping.utils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
