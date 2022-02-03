@@ -12,7 +12,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
-        if (path == null || path == "/") {
+        if (path == null || path.equals("/")) {
             path = "/index";
         }
         switch (path) {

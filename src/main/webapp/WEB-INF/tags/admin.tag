@@ -14,11 +14,9 @@
 </head>
 <body>
     <jsp:include page="../../views/partials/nav.jsp"/>
-    <jsp:include page="../../views/partials/categories.jsp"/>
 
-    <div class="container-fluid">
-        <jsp:doBody/>
-    </div>
+    <jsp:doBody/>
+
 
     <jsp:include page="../../views/partials/footer.jsp"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
