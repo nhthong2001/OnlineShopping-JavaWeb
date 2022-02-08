@@ -26,8 +26,12 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="card mb-4">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between">
                             Danh mục chính
+                            <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/admin/category/addMain" role="button">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                Thêm
+                            </a>
                         </div>
                         <div class="card-body">
                             <table class="table table-hover text-center">
@@ -44,7 +48,7 @@
                                         <th scope="row">${category.catID}</th>
                                         <td>${category.catName}</td>
                                         <td>
-                                            <a class="btn btn-outline-primary" href="#" role="button">
+                                            <a class="btn btn-outline-primary float-right" href="#" role="button">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </a>
                                         </td>
@@ -55,8 +59,12 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between">
                             Danh mục phụ
+                            <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/admin/category/addSub" role="button">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                Thêm
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="card-body">
@@ -80,7 +88,7 @@
                                             </c:if>
                                         </c:forEach>
                                             <td>
-                                                <a class="btn btn-outline-primary" href="#" role="button">
+                                                <a class="btn btn-outline-primary float-right" href="#" role="button">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </a>
                                             </td>
