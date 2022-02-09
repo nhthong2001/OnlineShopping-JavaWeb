@@ -1,4 +1,6 @@
 <%@ tag pageEncoding="utf-8" %>
+<%@ attribute name="css" fragment="true" required="false" %>
+<%@ attribute name="js" fragment="true" required="false" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <jsp:invoke fragment="css"/>
 </head>
 <body>
     <jsp:include page="../../views/partials/nav.jsp"/>
@@ -28,6 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
             integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
             crossorigin="anonymous"></script>
+    <jsp:invoke fragment="js"/>
 </body>
 </html>
 

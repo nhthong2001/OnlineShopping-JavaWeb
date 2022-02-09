@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="listMainCat" scope="request" type="java.util.List<com.nht.onlineshopping.beans.Category>"/>
+<jsp:useBean id="categorynext" scope="request" type="com.nht.onlineshopping.beans.CategoryNext"/>
 
 
 <t:admin>
@@ -54,7 +55,11 @@
                                         <label for="catName">Tên danh mục chính</label>
                                         <select class="form-control" id="catName">
                                             <c:forEach items="${listMainCat}" var="mainCat">
-                                                <option name=${mainCat.catID}>
+                                                <option name=${mainCat.catID}
+                                                        <c:if test="${mainCat.catID == categorynext.catID}">
+                                                                selected
+                                                        </c:if>
+                                                >
                                                         ${mainCat.catName}
                                                 </option>
                                             </c:forEach>
@@ -64,7 +69,7 @@
                                     <div class="form-group">
                                         <label for="CatNextName">Tên danh mục phụ</label>
                                         <input type="text" class="form-control" id="CatNextName" name="CatNextName"
-                                               placeholder="Nhập tên danh mục phụ" autofocus>
+                                              value="${categorynext.catNextName}" autofocus>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +83,7 @@
                                     </a>
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-check" aria-hidden="true"></i>
-                                        Thêm
+                                        Sửa
                                     </button>
                                 </div>
                             </div>

@@ -48,9 +48,15 @@
                                         <th scope="row">${category.catID}</th>
                                         <td>${category.catName}</td>
                                         <td>
-                                            <a class="btn btn-outline-primary float-right" href="#" role="button">
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
+                                            <span class="float-right">
+                                                <a class="btn btn-outline-primary mr-2" href="${pageContext.request.contextPath}/admin/category/editMain?id=${category.catID}" role="button">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </a>
+                                                <a class="btn btn-outline-primary" href="javascript: $('#frmDel').submit();" role="button">
+                                                    <form id="frmDel" action="${pageContext.request.contextPath}/admin/category/deleteMain?id=${category.catID}" method="post"></form>
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -88,7 +94,7 @@
                                             </c:if>
                                         </c:forEach>
                                             <td>
-                                                <a class="btn btn-outline-primary float-right" href="#" role="button">
+                                                <a class="btn btn-outline-primary float-right" href="${pageContext.request.contextPath}/admin/category/editSub?id=${categoryNext.catIDNext}" role="button">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </a>
                                             </td>

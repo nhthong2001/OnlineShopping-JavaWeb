@@ -1,28 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="listMainCat" scope="request" type="java.util.List<com.nht.onlineshopping.beans.Category>"/>
+<jsp:useBean id="category" scope="request" type="com.nht.onlineshopping.beans.Category"/>
 
 
 <t:admin>
-    <jsp:attribute name="js">
-        <script>
-            $('#frmAddSubCat').on('submit', function (e) {
-                e.preventDefault();
-                const catID = $('#catName').find('option:selected').attr("name");
-                $('#CatID').val(catID);
-
-                const CatNextName = $('#CatNextName').val();
-                if (CatNextName === '') {
-                    alert("Tên không hợp lệ");
-                    return;
-                } else {
-                    $('#frmAddSubCat').off('submit').submit();
-                }
-
-            });
-        </script>
-    </jsp:attribute>
     <jsp:body>
         <div class="container-fluid">
             <div class="row">
@@ -44,27 +26,21 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="card">
-                        <form id="frmAddSubCat" method="post" class="justify-content-center">
+                        <form method="post" class="justify-content-center">
                             <div class="card-header">
-                                Thêm Danh Mục Phụ
+                                Thêm Danh Mục Chính
                             </div>
                             <div class="row justify-content-center">
                                 <div class="card-body col-sm-6">
                                     <div class="form-group">
-                                        <label for="catName">Tên danh mục chính</label>
-                                        <select class="form-control" id="catName">
-                                            <c:forEach items="${listMainCat}" var="mainCat">
-                                                <option name=${mainCat.catID}>
-                                                        ${mainCat.catName}
-                                                </option>
-                                            </c:forEach>
-                                        </select>
-                                        <input type="number" hidden name="CatID" id="CatID"/>
+                                        <label for="CatID">Mã danh mục</label>
+                                        <input type="text" class="form-control" id="CatID" name="CatID" readonly
+                                               value="${category.catID}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="CatNextName">Tên danh mục phụ</label>
-                                        <input type="text" class="form-control" id="CatNextName" name="CatNextName"
-                                               placeholder="Nhập tên danh mục phụ" autofocus>
+                                        <label for="CatName">Tên danh mục</label>
+                                        <input type="text" class="form-control" id="CatName" name="CatName"
+                                               value="${category.catName}" autofocus>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +54,7 @@
                                     </a>
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-check" aria-hidden="true"></i>
-                                        Thêm
+                                        Sửa
                                     </button>
                                 </div>
                             </div>
