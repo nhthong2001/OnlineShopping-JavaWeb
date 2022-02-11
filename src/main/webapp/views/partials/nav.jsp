@@ -12,8 +12,8 @@
             </form>
         </div>
         <div class="navbar-nav ml-auto">
-            <a type="button" href="#" class="btn btn-outline-success mr-3">Đăng ký</a>
-            <a type="button" href="#" class="btn btn-outline-danger">Đăng nhập</a>
+            <a type="button" href="${pageContext.request.contextPath}/auth/signup" class="btn btn-outline-success mr-3">Đăng ký</a>
+            <a type="button" href="${pageContext.request.contextPath}/auth/login" class="btn btn-outline-danger">Đăng nhập</a>
         </div>
     </div>
 </nav>
