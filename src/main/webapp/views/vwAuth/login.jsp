@@ -79,7 +79,7 @@
     </jsp:attribute>
     <jsp:body>
         <div id="logreg-forms" class="shadow-lg">
-            <form class="form-login">
+            <form class="form-login" method="post" action="">
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">
                     <b>ĐĂNG NHẬP</b>
                 </h1>
@@ -92,9 +92,9 @@
                     </button>
                 </div>
                 <p style="text-align:center"> HOẶC </p>
-                <input type="text" id="inputUsername" class="form-control" placeholder="Tài khoản" required=""
+                <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Tài khoản" required=""
                        autofocus="">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="">
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Mật khẩu" required="">
 
                 <button class="btn btn-success btn-block" type="submit">
                     <i class="fa fa-sign-in"></i>
