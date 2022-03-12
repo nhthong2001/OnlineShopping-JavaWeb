@@ -1,40 +1,50 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:useBean id="products" scope="request" type="java.util.List<com.nht.onlineshopping.beans.Product>"/>
 <t:main>
     <jsp:body>
-        <div class="container-fluid">
         <div class="card">
-        <div class="card-header">
-            Sản phẩm
-        </div>
-        <div class="card-body">
-            <div class="card">
-                <div class="card-deck">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div class="card-header">
+                <h3>SẢN PHẨM</h3>
+            </div>
+            <div class="card-body">
+                <c:choose>
+                    <c:when test="${products.size() == 0}">
+                        <p>Không có sản phẩm</p>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="row">
+                            <c:forEach items="${products}" var="p">
+                                <div class="col-sm-4 mb-4">
+                                    <div class="card h-100">
+                                        <img src="${pageContext.request.contextPath}/public/img/product/${p.proID}/1.png"
+                                             alt="${p.proName}" title="${p.proName}" class="card-img-top">
+                                        <div class="card-body">
+                                            <h4 class="card-title">${p.proName}</h4>
+                                            <h5 class="card-title text-danger">
+                                                <fmt:setLocale value="vi_VN"/>
+                                                <fmt:formatNumber value="${p.priceCurrent}" type="currency"/>
+                                            </h5>
+                                            <p class="card-text">Text</p>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            <a class="btn btn-sm btn-outline-danger" href="#" role="button">
+                                                <i class="fa fa-heart" aria-hidden="true"></i>
+                                                Yêu thích
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#" role="button">
+                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                Mua ngay
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
-                    </div>
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </jsp:body>
