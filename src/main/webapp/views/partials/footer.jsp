@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<footer class="text-center text-white" style="background-color: #f8f8f8;">
+<footer class="text-center text-white mt-4" style="background-color: #f8f8f8;">
     <div class="container pt-4">
         <section class="mb-4">
             <!-- Facebook -->
