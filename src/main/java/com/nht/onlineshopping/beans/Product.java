@@ -3,11 +3,11 @@ package com.nht.onlineshopping.beans;
 import java.time.LocalDateTime;
 
 public class Product {
-    int ProID, BidderCount, CatIDNext;
-    String ProName, Bidder, Description, Seller;
-    Long PriceCurrent, PriceWin, stepPrice, firstPrice;
-    LocalDateTime DateStart, DateEnd;
-    boolean renewal, isVerify, emailed;
+    private int ProID, BidderCount, CatIDNext;
+    private String ProName, Bidder, Description, Seller;
+    private Long PriceCurrent, PriceWin, stepPrice, firstPrice;
+    private LocalDateTime DateStart, DateEnd;
+    private boolean renewal, isVerify, emailed;
 
     public Product() {
     }

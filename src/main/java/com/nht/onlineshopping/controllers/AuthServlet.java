@@ -9,6 +9,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "AuthServlet", value = "/auth/*")
 public class AuthServlet extends HttpServlet {
@@ -40,10 +43,10 @@ public class AuthServlet extends HttpServlet {
                 login(request, response);
                 break;
             case "/logout":
-                logout(request,response);
+                logout(request, response);
                 break;
             case "/signup":
-                ServletUtils.forward("/views/vwAuth/signup.jsp", request, response);
+                signup(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -64,7 +67,7 @@ public class AuthServlet extends HttpServlet {
                 session.setAttribute("authUser", user);
 
                 String url = String.valueOf(session.getAttribute("retUrl"));
-                if (url == null){
+                if (url.equals("null")) {
                     url = "/home";
                 }
                 ServletUtils.redirect(url, request, response);
@@ -86,9 +89,28 @@ public class AuthServlet extends HttpServlet {
         session.setAttribute("authUser", new Account());
 
         String url = request.getHeader("referer");
-        if (url == null){
+        if (url == null) {
             url = "/home";
         }
+        ServletUtils.redirect(url, request, response);
+    }
+
+    private void signup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = ServletUtils.setUTF8(request.getParameter("name"));
+        String address = ServletUtils.setUTF8(request.getParameter("address"));
+        String strDob = request.getParameter("dob");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dob = LocalDate.parse(strDob, df);
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String rawpwd = request.getParameter("rawpwd");
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());
+
+        Account account = new Account(name, address, email, "bidder", username, bcryptHashString, 0, 0,
+                -1, false, false, dob);
+        AccountModel.add(account);
+
+        String url = "/auth/login";
         ServletUtils.redirect(url, request, response);
     }
 }

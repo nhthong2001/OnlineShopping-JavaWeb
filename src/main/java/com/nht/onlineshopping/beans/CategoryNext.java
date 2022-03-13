@@ -1,9 +1,9 @@
 package com.nht.onlineshopping.beans;
 
 public class CategoryNext {
-    int CatID;
-    int CatIDNext;
-    String CatNextName;
+    private int CatID;
+    private int CatIDNext;
+    private String CatNextName;
 
     public CategoryNext() {
     }

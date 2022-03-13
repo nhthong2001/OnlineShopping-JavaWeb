@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class ServletUtils {
     public static void forward(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,5 +21,10 @@ public class ServletUtils {
         } else {
             response.sendRedirect(url);
         }
+    }
+    public  static String setUTF8(String s){
+        byte[] bytes = s.getBytes(StandardCharsets.ISO_8859_1);
+        s = new String(bytes, StandardCharsets.UTF_8);
+        return s;
     }
 }
