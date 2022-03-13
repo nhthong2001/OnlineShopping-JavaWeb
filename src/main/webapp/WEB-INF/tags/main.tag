@@ -13,27 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .list-group > .list-group {
-            display: none;
-            margin-bottom: 0;
-        }
-        .list-group-item:focus-within + .list-group {
-            display: block;
-        }
-        .list-group > .list-group-item {
-            border-radius: 0;
-            border-width: 1px 0 0 0;
-        }
-
-        .list-group > .list-group-item:first-child {
-            border-top-width: 0;
-        }
-
-        .list-group  > .list-group > .list-group-item {
-            padding-left: 2.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/mainStyle.css">
     <jsp:invoke fragment="css"/>
 </head>
 <body>
@@ -57,6 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
             integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
             crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/public/js/mainJs.js"></script>
     <jsp:invoke fragment="js"/>
 </body>
 </html>

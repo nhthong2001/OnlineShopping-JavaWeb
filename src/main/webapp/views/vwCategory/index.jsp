@@ -7,104 +7,92 @@
 <t:admin>
     <jsp:body>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="card">
-                        <div class="card-header">
-                            Danh mục
-                        </div>
-                        <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                                The current link item
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                            <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-10">
-                    <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between">
-                            Danh mục chính
-                            <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/admin/category/addMain" role="button">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                Thêm
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover text-center">
-                                <thead>
-                                <tr>
-                                    <th scope="col">CatID</th>
-                                    <th scope="col">Tên danh mục</th>
-                                    <th scope="col">&nbsp;</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${categories}" var="category">
-                                    <tr>
-                                        <th scope="row">${category.catID}</th>
-                                        <td>${category.catName}</td>
-                                        <td>
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between">
+                Danh mục chính
+                <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/admin/category/addMain"
+                   role="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Thêm
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">CatID</th>
+                        <th scope="col">Tên danh mục</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${categories}" var="category">
+                        <tr>
+                            <th scope="row">${category.catID}</th>
+                            <td>${category.catName}</td>
+                            <td>
                                             <span class="float-right">
-                                                <a class="btn btn-outline-primary mr-2" href="${pageContext.request.contextPath}/admin/category/editMain?id=${category.catID}" role="button">
+                                                <a class="btn btn-outline-primary mr-2"
+                                                   href="${pageContext.request.contextPath}/admin/category/editMain?id=${category.catID}"
+                                                   role="button">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </a>
-                                                <a class="btn btn-outline-primary" href="javascript: $('#frmDel').submit();" role="button">
-                                                    <form id="frmDel" action="${pageContext.request.contextPath}/admin/category/deleteMain?id=${category.catID}" method="post"></form>
+                                                <a class="btn btn-outline-primary"
+                                                   href="javascript: $('#frmDel').submit();" role="button">
+                                                    <form id="frmDel"
+                                                          action="${pageContext.request.contextPath}/admin/category/deleteMain?id=${category.catID}"
+                                                          method="post"></form>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                             </span>
-                                        </td>
-                                    </tr>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                Danh mục phụ
+                <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/admin/category/addSub"
+                   role="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Thêm
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                    <table class="table table-hover text-center">
+                        <thead>
+                        <tr>
+                            <th scope="col">Mã danh mục phụ</th>
+                            <th scope="col">Tên danh mục phụ</th>
+                            <th scope="col">Danh mục chính</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${categoriesNext}" var="categoryNext">
+                            <tr>
+                                <th scope="row">${categoryNext.catIDNext}</th>
+                                <td>${categoryNext.catNextName}</td>
+                                <c:forEach items="${categories}" var="category">
+                                    <c:if test="${category.catID == categoryNext.catID}">
+                                        <td>${category.catName}</td>
+                                    </c:if>
                                 </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            Danh mục phụ
-                            <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/admin/category/addSub" role="button">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                Thêm
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body">
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Mã danh mục phụ</th>
-                                        <th scope="col">Tên danh mục phụ</th>
-                                        <th scope="col">Danh mục chính</th>
-                                        <th scope="col">&nbsp;</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${categoriesNext}" var="categoryNext">
-                                        <tr>
-                                            <th scope="row">${categoryNext.catIDNext}</th>
-                                            <td>${categoryNext.catNextName}</td>
-                                        <c:forEach items="${categories}" var="category">
-                                            <c:if test="${category.catID == categoryNext.catID}">
-                                                <td>${category.catName}</td>
-                                            </c:if>
-                                        </c:forEach>
-                                            <td>
-                                                <a class="btn btn-outline-primary float-right" href="${pageContext.request.contextPath}/admin/category/editSub?id=${categoryNext.catIDNext}" role="button">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                <td>
+                                    <a class="btn btn-outline-primary float-right"
+                                       href="${pageContext.request.contextPath}/admin/category/editSub?id=${categoryNext.catIDNext}"
+                                       role="button">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

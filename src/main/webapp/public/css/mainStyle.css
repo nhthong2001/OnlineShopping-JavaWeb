@@ -1,0 +1,20 @@
+.list-group > .list-group {
+    display: none;
+    margin-bottom: 0;
+}
+
+.list-group-item + .list-group {
+    display: block;
+}
+
+.list-group > .list-group > .list-group-item {
+    padding-left: 2.5rem;
+}
+
+.subCat {
+    display: none;
+}
+.link-product a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}

@@ -6,15 +6,17 @@
     <div class="card-header">
         Danh mục
     </div>
+    <input type="number" value="${categories.size()}" id="totalCat" hidden>
     <div class="list-group list-group-flush">
-
         <c:forEach items="${categories}" var="categories">
-            <a href="javascript:;" class="list-group-item list-group-item-action">${categories.catName}</a>
-            <div class="list-group list-group-item-action">
+            <button class="list-group-item list-group-item-action" id="mainCat${categories.catID}">
+                    <h6>${categories.catName}</h6>
+            </button>
+            <div class="list-group list-group-item-action list-group-flush">
                 <c:forEach items="${categoriesNext}" var="categoryNext">
                     <c:if test="${categories.catID == categoryNext.catID}">
                         <a href="${pageContext.request.contextPath}/product/byCatNext?catIDNext=${categoryNext.catIDNext}"
-                           class="list-group-item">
+                           class="list-group-item list-group-item-action subCat${categories.catID} subCat" >
                                 ${categoryNext.catNextName}
                         </a>
                     </c:if>

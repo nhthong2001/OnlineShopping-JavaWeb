@@ -19,10 +19,10 @@ public class ProductServlet extends HttpServlet {
         String path = request.getPathInfo();
         switch (path) {
             case "/detail":
-                ServletUtils.forward("/views/vwAccount/productDetail.jsp", request, response);
+                productDetail(request, response);
                 break;
             case "/byCatNext":
-                getListProductByCatIDNext(request, response);
+                productByCatIDNext(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -30,11 +30,22 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    private void getListProductByCatIDNext(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void productByCatIDNext(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int catIdNext = Integer.parseInt(request.getParameter("catIDNext"));
         List<Product> p = ProductModel.findByCatIDNext(catIdNext);
         request.setAttribute("products", p);
         ServletUtils.forward("/views/vwProduct/product.jsp", request, response);
+    }
+
+    private void productDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int proId = Integer.parseInt(request.getParameter("id"));
+        Product p = ProductModel.findById(proId);
+        if (p == null) {
+            ServletUtils.forward("/views/404.jsp", request, response);
+            return;
+        }
+        request.setAttribute("product", p);
+        ServletUtils.forward("/views/vwProduct/detail.jsp", request, response);
     }
 
     @Override
