@@ -36,16 +36,81 @@
     <jsp:attribute name="js">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
         <script>
+            $('small').attr("hidden", true);
             $('#frmRegister').on('submit', function (e) {
                 e.preventDefault();
+
+                const name = $('#txtName').val();
+                if (name.length === 0) {
+                    $('#nameHelp').attr("hidden", false)
+                    return;
+                } else {
+                    $('#nameHelp').attr("hidden", true)
+                }
+
+                const address = $('#txtAddress').val();
+                if (address.length === 0) {
+                    $('#addressHelp').attr("hidden", false)
+                    return;
+                } else {
+                    $('#addressHelp').attr("hidden", true)
+                }
+
+                const dob = $('#txtDob').val();
+                if (dob.length === 0 || dob === '__/__/____') {
+                    $('#dobHelp').attr("hidden", false)
+                    return;
+                } else {
+                    $('#dobHelp').attr("hidden", true)
+                }
+                const email = $('#txtEmail').val();
+                if (email.length === 0) {
+                    $('#emailHelp').attr("hidden", false)
+                    return;
+                } else {
+                    $('#emailHelp').attr("hidden", true)
+                }
+
                 const username = $('#txtUsername').val();
                 if (username.length === 0) {
-                    $('#usernameWarning').attr("hidden", false)
+                    $('#usernameHelp').attr("hidden", false)
                     return;
+                } else {
+                    $('#usernameHelp').attr("hidden", true)
                 }
-                $('#frmRegister').off('submit').submit();
+
+                const pwd = $('#password').val();
+                if (pwd.length === 0) {
+                    $('#passwordHelp').attr("hidden", false)
+                    return;
+                } else {
+                    $('#passwordHelp').attr("hidden", true)
+                }
+
+                const pwdC = $('#passwordConfirm').val();
+                if (pwdC.length === 0) {
+                    $('#passwordConfirmHelp').attr("hidden", false)
+                    return;
+                } else {
+                    if (pwd !== pwdC) {
+                        $('#passwordConfirmHelp').text("Xác nhận mật khẩu không khớp");
+                        $('#passwordConfirmHelp').attr("hidden", false);
+                        return;
+                    }
+                    $('#passwordConfirmHelp').attr("hidden", true);
+                }
+
+
+                $.getJSON('${pageContext.request.contextPath}/check/isAvailable?username='+ username, function (data) {
+                    if (data == false){
+                        $('#usernameHelp').text("Tài khoản đã tồn tại");
+                        $('#usernameHelp').attr("hidden", false);
+                    } else {
+                        $('#frmRegister').off('submit').submit();
+                    }
+                })
             })
-            $('small').attr("hidden", true);
+
             $('#txtDob').datetimepicker({
                 format: 'd/m/Y',
                 timepicker: false,
@@ -72,28 +137,28 @@
                         <div class="form-group">
                             <label for="txtName">Họ tên</label>
                             <input type="text" class="form-control" id="txtName" name="name" autofocus>
-                            <small id="nameHelp" class="form-text text-muted">
+                            <small id="nameHelp" class="form-text text-danger">
                                 Họ tên không được bỏ trống
                             </small>
                         </div>
                         <div class="form-group">
                             <label for="txtAddress">Địa chỉ</label>
                             <input type="text" class="form-control" id="txtAddress" name="address">
-                            <small id="addressHelp" class="form-text text-muted">
+                            <small id="addressHelp" class="form-text text-danger">
                                 Địa chỉ không được bỏ trống
                             </small>
                         </div>
                         <div class="form-group">
                             <label for="txtDob">Ngày sinh</label>
                             <input type="text" class="form-control" id="txtDob" name="dob">
-                            <small id="dobHelp" class="form-text text-muted">
+                            <small id="dobHelp" class="form-text text-danger">
                                 Chưa chọn ngày sinh
                             </small>
                         </div>
                         <div class="form-group">
                             <label for="txtEmail">Email</label>
                             <input type="text" class="form-control" id="txtEmail" name="email">
-                            <small id="emailHelp" class="form-text text-muted">
+                            <small id="emailHelp" class="form-text text-danger">
                                 Email đã tồn tại
                             </small>
                         </div>
@@ -102,21 +167,21 @@
                         <div class="form-group">
                             <label for="txtUsername">Tài khoản</label>
                             <input type="text" class="form-control" id="txtUsername" name="username">
-                            <small class="form-text text-muted" id="usernameWarning">
+                            <small class="form-text text-danger" id="usernameHelp">
                                 Chưa điền thông tin tài khoản
                             </small>
                         </div>
                         <div class="form-group">
                             <label for="password">Mật khẩu</label>
                             <input type="password" class="form-control" id="password" name="rawpwd">
-                            <small class="form-text text-muted">
+                            <small class="form-text text-danger" id="passwordHelp">
                                 Chưa nhập mật khẩu
                             </small>
                         </div>
                         <div class="form-group">
                             <label for="passwordConfirm">Nhập lại mật khẩu</label>
                             <input type="password" class="form-control" id="passwordConfirm">
-                            <small class="form-text text-muted">
+                            <small class="form-text text-danger" id="passwordConfirmHelp">
                                 Nhập lại mật khẩu sai
                             </small>
                         </div>

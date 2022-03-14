@@ -31,4 +31,14 @@ public class ProductModel {
             return list.get(0);
         }
     }
+
+    public static List<Product> findByInfo(String info) {
+        final String query = "SELECT * FROM products WHERE MATCH(ProName) AGAINST(:info)";
+
+        try (Connection con = DbUtils.getConnection()) {
+            return  con.createQuery(query)
+                    .addParameter("info", info)
+                    .executeAndFetch(Product.class);
+        }
+    }
 }

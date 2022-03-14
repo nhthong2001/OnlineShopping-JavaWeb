@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "ProductServlet", value = "/product/*")
 public class ProductServlet extends HttpServlet {
@@ -50,6 +50,21 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getPathInfo();
+        switch (path) {
+            case "/search":
+                searchProduct(request, response);
+                break;
+            default:
+                ServletUtils.forward("/views/404.jsp", request, response);
+                break;
+        }
+    }
 
+    private void searchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String info = request.getParameter("info");
+        List<Product> list = ProductModel.findByInfo(info);
+        request.setAttribute("productList", list);
+        ServletUtils.forward("/views/vwProduct/searchProduct.jsp", request, response);
     }
 }

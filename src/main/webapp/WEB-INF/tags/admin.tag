@@ -38,6 +38,29 @@
             integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
             crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/public/js/mainJs.js"></script>
+    <script>
+        $('#txtInfo').keypress(function (event) {
+            const keycode = (event.keyCode ? event.keyCode : event.which);
+
+            if (keycode === '13') {
+                const action = $('#txtInfo').val();
+                const url = "${pageContext.request.contextPath}/product/search?info=" + action;
+                $('#frmSearch').attr('action', url);
+                $('#frmSearch').submit();
+            }
+        });
+        $('#frmSearch').on('submit', function (e) {
+            e.preventDefault();
+
+            const info = $('#txtInfo').val();
+            if (info.length === 0) {
+                return;
+            }
+            const url = "${pageContext.request.contextPath}/product/search?info=" + info;
+            $('#frmSearch').attr('action', url);
+            $('#frmSearch').off('submit').submit();
+        })
+    </script>
     <jsp:invoke fragment="js"/>
 </body>
 </html>
